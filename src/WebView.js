@@ -33,7 +33,7 @@ const WebViewScreen = props => {
     <>
       <SafeAreaView style={styles.flexContainer}>
         <WebView
-          source={{uri}}
+          source={{uri: uri}}
           renderLoading={LoadingIndicatorView}
           startInLoadingState={true}
           ref={webviewRef}
@@ -42,7 +42,7 @@ const WebViewScreen = props => {
           <TouchableOpacity onPress={webViewgoback}>
             <Text style={{color: 'green'}}>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => props.navigation.navigate('Home')}>
+          <TouchableOpacity onPress={() => props.navigation.goBack()}>
             <Text style={{color: 'green'}}>Exit</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={webViewNext}>

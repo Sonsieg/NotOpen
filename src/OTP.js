@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, StatusBar} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  StatusBar,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
@@ -11,7 +17,10 @@ const OTP = () => {
   const onCode = code => {
     setOTP(code);
   };
+  console.log('otp', otp);
+
   const goLogin = () => {
+    console.log('otp', otp);
     if (otp === '1892') {
       navigation.navigate('URL');
     }
@@ -20,34 +29,31 @@ const OTP = () => {
   return (
     <View style={styles.view}>
       <StatusBar />
-      <KeyboardAwareScrollView
-        enableOnAndroid
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps={'handled'}>
-        <OTPInputView
-          style={styles.OTP}
-          pinCount={4}
-          onCodeChanged={onCode}
-          code={otp}
-          autoFocusOnLoad
-          keyboardType="number-pad"
-          codeInputFieldStyle={[
-            styles.underlineStyleBase,
-            otp.length === 4 && {borderColor: `#9932cc`},
-          ]}
-          codeInputHighlightStyle={styles.underlineStyleHighLighted}
-          onCodeFilled={goLogin}
-          placeholderTextColor={`#9932cc`}
-          editable={true}
-          selectionColor={`#9932cc`}
-        />
-      </KeyboardAwareScrollView>
+      <OTPInputView
+        style={styles.OTP}
+        pinCount={4}
+        onCodeChanged={onCode}
+        code={otp}
+        autoFocusOnLoad
+        keyboardType="number-pad"
+        codeInputFieldStyle={[
+          styles.underlineStyleBase,
+          otp.length === 4 && {borderColor: `#9932cc`},
+        ]}
+        codeInputHighlightStyle={styles.underlineStyleHighLighted}
+        placeholderTextColor={`#9932cc`}
+        editable={true}
+        selectionColor={`#9932cc`}
+      />
+      <TouchableOpacity style={styles.button} onPress={goLogin}>
+        <Text>Go webview</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 const styles = StyleSheet.create({
   underlineStyleBase: {
-    width: 45,
+    width: 40,
     height: 50,
     borderWidth: 2,
     borderColor: 'gray',
@@ -66,13 +72,22 @@ const styles = StyleSheet.create({
     fontFamily: 'cs',
   },
   OTP: {
-    width: '100%',
     height: 120,
   },
   view: {
     backgroundColor: 'white',
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingTop: 50,
+  },
+  button: {
+    width: '100%',
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 5,
   },
 });
 

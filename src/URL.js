@@ -14,13 +14,19 @@ const URL = () => {
   const [value, setValue] = useState('');
 
   const onLogin = () => {
-    navigation.navigate('WebView', {
+    navigation.navigate('WebViewScreen', {
       uri: value,
     });
   };
 
   return (
-    <View style={{backgroundColor: 'white', width: '100%', height: '100%'}}>
+    <View
+      style={{
+        backgroundColor: 'white',
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+      }}>
       <KeyboardAwareScrollView
         enableOnAndroid
         showsVerticalScrollIndicator={false}
@@ -32,8 +38,10 @@ const URL = () => {
             setValue(text);
           }}
         />
-        <View padding={[0, 15]}>
-          <TouchableOpacity onPress={onLogin}>
+        <View>
+          <TouchableOpacity
+            style={{width: '100%', marginTop: 20}}
+            onPress={onLogin}>
             <Text>Go webview</Text>
           </TouchableOpacity>
         </View>
@@ -43,7 +51,7 @@ const URL = () => {
 };
 const styles = StyleSheet.create({
   textInput: {
-    width: '70%',
+    width: 250,
     height: 40,
     borderRadius: 8,
     borderWidth: 2,
