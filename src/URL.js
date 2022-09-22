@@ -25,7 +25,6 @@ const URL = () => {
     });
     closeModal();
   };
-  console.log('todoList', list);
   const addItem = () => {
     setList(oldTodoList => [...oldTodoList, value]);
   };
