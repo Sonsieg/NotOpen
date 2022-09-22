@@ -7,7 +7,6 @@ import {
   Text,
 } from 'react-native';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {useNavigation} from '@react-navigation/native';
 
 const OTP = () => {
@@ -17,12 +16,11 @@ const OTP = () => {
   const onCode = code => {
     setOTP(code);
   };
-  console.log('otp', otp);
 
   const goLogin = () => {
-    console.log('otp', otp);
     if (otp === '1892') {
       navigation.navigate('URL');
+      setOTP('');
     }
   };
 

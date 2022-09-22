@@ -20,13 +20,7 @@ const URL = () => {
   };
 
   return (
-    <View
-      style={{
-        backgroundColor: 'white',
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-      }}>
+    <View style={styles.view}>
       <KeyboardAwareScrollView
         enableOnAndroid
         showsVerticalScrollIndicator={false}
@@ -37,11 +31,14 @@ const URL = () => {
           onChangeText={text => {
             setValue(text);
           }}
+          placeholder="Web entry"
+          onSubmitEditing={onLogin}
         />
         <View>
-          <TouchableOpacity
-            style={{width: '100%', marginTop: 20}}
-            onPress={onLogin}>
+          <TouchableOpacity style={styles.save} onPress={onLogin}>
+            <Text>Save URL</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.touch} onPress={onLogin}>
             <Text>Go webview</Text>
           </TouchableOpacity>
         </View>
@@ -54,7 +51,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 40,
     borderRadius: 8,
-    borderWidth: 2,
+    borderWidth: 1,
     textAlign: 'center',
     color: 'green',
     fontSize: 13,
@@ -76,6 +73,35 @@ const styles = StyleSheet.create({
     top: -5,
     position: 'absolute',
     left: '15%',
+  },
+  view: {
+    backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    paddingTop: 20,
+  },
+  save: {
+    width: '100%',
+    marginTop: 20,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 10,
+    backgroundColor: '#d3f999',
+  },
+  touch: {
+    width: '100%',
+    marginTop: 20,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 10,
+    backgroundColor: '#d3d399',
   },
 });
 export default URL;

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React from 'react';
 import {WebView} from 'react-native-webview';
 import {
   View,
@@ -10,15 +10,15 @@ import {
 } from 'react-native';
 
 const WebViewScreen = props => {
-  const {uri} = props?.route?.params || 'https://www.google.com/';
+  const {uri} = props?.route?.params;
   const webviewRef = React.useRef(null);
 
-  function webViewgoback() {
-    if (webviewRef.current) webviewRef.current.goBack();
+  function webViewGoBack() {
+    if (webviewRef && webviewRef.current) webviewRef.current.goBack();
   }
 
   function webViewNext() {
-    if (webviewRef.current) webviewRef.current.goForward();
+    if (webviewRef && webviewRef.current) webviewRef.current.goForward();
   }
   function LoadingIndicatorView() {
     return (
@@ -33,20 +33,20 @@ const WebViewScreen = props => {
     <>
       <SafeAreaView style={styles.flexContainer}>
         <WebView
-          source={{uri: uri}}
+          source={{uri: uri ? `https://${uri}` : 'https://google.com'}}
           renderLoading={LoadingIndicatorView}
           startInLoadingState={true}
           ref={webviewRef}
         />
         <View style={styles.tabBarContainer}>
-          <TouchableOpacity onPress={webViewgoback}>
-            <Text style={{color: 'green'}}>Back</Text>
+          <TouchableOpacity onPress={webViewGoBack}>
+            <Text style={styles.text}>Back</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Text style={{color: 'green'}}>Exit</Text>
+            <Text style={styles.text}>Exit</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={webViewNext}>
-            <Text style={{color: 'green'}}>Next</Text>
+            <Text style={styles.text}>Next</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabBarContainer: {
-    backgroundColor: '#d3d3d3',
+    backgroundColor: '#d3d399',
     height: 56,
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 16,
+    paddingHorizontal: 30,
     justifyContent: 'space-between',
   },
   button: {
@@ -79,5 +79,6 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
   },
+  text: {color: 'green', fontWeight: '500'},
 });
 export default WebViewScreen;
