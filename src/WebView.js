@@ -11,6 +11,7 @@ import {
 
 const WebViewScreen = props => {
   const {uri} = props?.route?.params;
+  console.log('uri', uri);
   const webviewRef = React.useRef(null);
 
   function webViewGoBack() {
